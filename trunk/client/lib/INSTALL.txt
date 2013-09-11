@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+#	Run this script to download the various libraries used by the client.
+#
+while read target src ; do
+	case "$target" in
+	\#) ;;
+	*) rm -f "$target"; wget -O "$target" "$src" ;;
+	esac
+done <<-EOF
+require.js					http://requirejs.org/docs/release/2.1.8/comments/require.js
+# require.js				http://requirejs.org/docs/release/2.1.8/minified/require.js
+text.js						https://raw.github.com/requirejs/text/latest/text.js
+jquery.js					http://code.jquery.com/jquery-1.10.2.min.js
+jquery-1.10.2.min.map		http://code.jquery.com/jquery-1.10.2.min.map
+jqurry-ui.js				http://code.jquery.com/ui/1.10.3/jquery-ui.js
+# jquery-ui.css 			http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css
+EOF
