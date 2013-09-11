@@ -64,7 +64,7 @@ define(function() {
 		require(modules, function() {
 			_init(modules,arguments);
 			if (callback) {
-				return callback.apply(window.UI, arguments);
+				return callback.apply(UI, arguments);
 			}
 		});
 	};
@@ -114,12 +114,12 @@ define(function() {
 		var modules = _c2m(components);
 		define(modules,function() {
 			_init(modules, arguments);
-			return ready.apply(window.UI, arguments);
+			return ready.apply(UI, arguments);
 		});
 	};
 
 	// UI public interface(s)
-	return window.UI = { 
+	return { 
 
 		// UI.load('ui/ui-components') - Loads the UI, called by client.html 
 		load: function(from) { _load(from); },
