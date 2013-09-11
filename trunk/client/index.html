@@ -17,11 +17,14 @@
 	<script src="lib/jquery-ui.js"></script>
 	<body>
 		<script>
-			$(function() {
-				require(['ui/init' ], function(UI) {
-					UI.load('ui/ui-components');
+			(function(global){
+				$(function() {
+					require(['ui/init' ], function(UI) {
+						global.UI = UI;
+						UI.load('ui/ui-components');
+					});
 				});
-			});
+			})(this);
 		</script>
 	</body>
 </html>
