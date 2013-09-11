@@ -1,0 +1,6 @@
+All code from this folder and below, with the exception of third party libraries 
+which may have been downloaded are Copyright 2013 Austin France.
+
+This software is released under the MIT-License: 
+
+	http://opensource.org/licenses/mit-license.php
