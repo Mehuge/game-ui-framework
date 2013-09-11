@@ -1,0 +1,23 @@
+#p-uf { position: absolute; bottom: 5px; right: 5px; width: 128px; height: 95px; font-family: Arial; display: none;
+	background-image: url('ui/player-unitframe/images/unit-frame.png');
+ }
+#p-uf #p-name { position: absolute; top: 0px; left: 16px; width: 101px; height: 10px; font-size: 10px; color: white; }
+#p-uf #t-name { position: absolute; top: 66px; left: 7px; width: 116px; height: 10px; font-size: 10px; color: yellow; }
+#p-uf #p-health { position: absolute; top: 16px; left: 29px; width: 92px; height: 10px;
+	background-image: url('ui/player-unitframe/images/uf-health.png');
+}
+#p-uf #p-endurance { position: absolute; top: 27px; left: 29px; width: 92px; height: 10px;
+	background-image: url('ui/player-unitframe/images/uf-endurance.png');
+}
+#p-uf #p-mana { position: absolute; top: 38px; left: 29px; width: 92px; height: 10px;
+	background-image: url('ui/player-unitframe/images/uf-mana.png');
+}
+#p-uf #p-bubs { position: absolute; top: 49px; left: 29px; width: 91px; height: 9px;
+	background-image: url('ui/player-unitframe/images/uf-exbubs.png');
+}
+#p-uf #p-bar { position: absolute; top: 58px; left: 30px; width: 89px; height: 5px;
+	background-image: url('ui/player-unitframe/images/uf-exbar.png');
+}
+#p-uf #t-health { position: absolute; top: 80px; left: 29px; width: 92px; height: 12px;
+	background-image: url('ui/player-unitframe/images/uf-target-health.png');
+}
