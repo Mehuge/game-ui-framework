@@ -8,7 +8,7 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 			return true;
 		case "reloadui":
 			location.reload();
-			break;
+			return true;
 		}
 	});
 });
