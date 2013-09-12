@@ -6,6 +6,9 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 		case "nick":
 			if (s.length > 1) state.nick(s[1]);
 			return true;
+		case "reloadui":
+			location.reload();
+			break;
 		}
 	});
 });
