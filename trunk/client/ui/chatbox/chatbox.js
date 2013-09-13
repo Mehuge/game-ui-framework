@@ -72,13 +72,14 @@ UI.define([
 
 	// keyboard press in chat box
 	function keyDown(e) {
-		if (e.keyCode == 13) {
+		if (e.keyCode == 13 && e.target.value.length) {
 			if (!process_command(e.target.value)) {
 				channel.chat(e.target.value);
 			}
 			e.target.value = '';
 			e.preventDefault();
 		}
+		e.stopPropagation();
 		return true;
 	}
 
@@ -99,6 +100,8 @@ UI.define([
 
 	// Attach onkeydown handler to input elemnt
 	input.on('keydown', keyDown);
+	// and stop global keypress handler getting fired for stuff typed into chat box
+	input.on('keypress', function(e) { e.stopPropagation(); });
 
 	// Initialise chat window
 	chatBox.draggable();				// make chatbox draggable
@@ -115,8 +118,8 @@ UI.define([
 	});
 
 	// Register for some global keypresses
-	keyboard.onkey(13, function() { input[0].focus(); });		// RETURN
-	keyboard.onkey(47, function() { input[0].focus(); });		// Slash (/)
+	keyboard.onkey(keyboard.RETURN, function() { input[0].focus(); return true; });							// RETURN
+	keyboard.onkey(keyboard.SLASH, function() { input[0].value = '/'; input[0].focus(); return true; });		// Slash (/)
 
 	// Return the public interface
 	return UI.ChatBox = exports;
