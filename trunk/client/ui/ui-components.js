@@ -9,4 +9,5 @@ define([], [
 	{ name: "experiment", disabled: true },
 	{ name: "simulation" },
 	{ name: "download" },
+	{ name: "pure-imagination" },
 ]);
