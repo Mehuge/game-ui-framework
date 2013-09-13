@@ -1,5 +1,5 @@
 "use strict";
-define(function() {
+UI.define([], function() {
 
 	var WebSocket = window.WebSocket || window.MozWebSocket;
 
