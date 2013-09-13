@@ -11,6 +11,7 @@
 			(function(global){
 				$(function() {
 					require(['ui/init' ], function(UI) {
+						UI.window = global;
 						global.UI = UI;
 						UI.load('ui/ui-components');
 					});

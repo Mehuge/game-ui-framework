@@ -1,5 +1,6 @@
 define([], [
 	{ name: "background" },
+	{ name: "keyboard" },
 	{ name: "chatbox" },
 	{ name: "player-unitframe" },
 	{ name: "helloworld" },

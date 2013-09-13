@@ -1,11 +1,12 @@
 "use strict";
 UI.define([
+	'keyboard',						// ui/keyboard/keyboard.js
 	'std',							// ui/std/std.js
 	'state',						// ui/state/state.js
 	'chat',							// ui/chat/chat.js
 	'text!./style.css',				// ./style.css
 	'text!./chatbox.html',			// ./chatbox.html
-], function(std, state, chat, css, html) {
+], function(keyboard, std, state, chat, css, html) {
 
 	var style = UI.css(css),
 		chatBox = UI.html(html),
@@ -76,8 +77,8 @@ UI.define([
 				channel.chat(e.target.value);
 			}
 			e.target.value = '';
+			e.preventDefault();
 		}
-		e.target.focus();
 		return true;
 	}
 
@@ -112,6 +113,10 @@ UI.define([
 	std.sub("PLAYER_NICK_CHANGED", function(nick) {
 		channel.nick(nick);
 	});
+
+	// Register for some global keypresses
+	keyboard.onkey(13, function() { input[0].focus(); });		// RETURN
+	keyboard.onkey(47, function() { input[0].focus(); });		// Slash (/)
 
 	// Return the public interface
 	return UI.ChatBox = exports;
