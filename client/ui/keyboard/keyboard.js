@@ -3,9 +3,8 @@ UI.define([], function() {
 	var kh = {};			// registered keypress handlers
 
 	// global key down handler
-	var lkd = $(UI.window).on("keypress", function(event) {
+	var lkd = $(UI.window.document).on("keypress", function(event) {
 		var handlers = kh[event.keyCode];
-		console.log('keypress ' + event.keyCode + ' handler ' + handlers);
 		if (handlers) {
 			for (var i = 0; i < handlers.length; i++) {
 				if (typeof handlers[i].action == "function") {
@@ -21,6 +20,7 @@ UI.define([], function() {
 				}
 			}
 		}
+		console.log('unhandled key press ' + event.keyCode);
 	});
 
 	return UI.keyboard = {
@@ -40,7 +40,11 @@ UI.define([], function() {
 					delete kh[h.key];
 				}
 			}
-		}
+		},
+
+		RETURN: 13,
+		SLASH: 47
+
 	};
 	
 });
