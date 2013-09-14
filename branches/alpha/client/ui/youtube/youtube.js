@@ -1,7 +1,7 @@
 UI.define([ 'chatbox', 'text!./embed.html', 'text!./embed.css' ], function(chatbox, html, css) {
 	UI.css(css);
 	var frame = UI.html(html), iframe = frame.children();
-	frame.draggable();
+	frame.draggable({ constrain: 'window' });
 	return { 
 		play: function(video) {
 			chatbox.println('Playing video ' + video, { color: "yellow" });

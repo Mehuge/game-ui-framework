@@ -1,0 +1,11 @@
+.action-bar { padding: 5px; height: 32px; border-color: #444; border-radius: 5px; }
+.action-bar>div { overflow: hidden; }
+.action-bar span { 
+	padding: 2px;
+	color: silver; font-size: 10px; 
+	display: inline-block; 
+	height: 26px; width: 26px; 
+	border: 1px outset silver; 
+	margin: 0;
+	cursor: pointer;
+}
