@@ -5,8 +5,9 @@ define(function() {
 
 	var _r = {}, _m = {},			// registered components and module map
 		LOADING = 0,				// ready states
-		LOADED = 1,
-		RUNNING = 2,
+		INITIALISED = 1,
+		DEFINED = 2,
+		STARTED = 3,
 		idSequence = 0;				// auto id sequence
 
 	// Once modules are loaded, this function is called to check if its a
@@ -19,19 +20,20 @@ define(function() {
 				if (args[i]) {
 					var pub = component._i = args[i];
 					var readyState = component.readyState || LOADING;
-					if (readyState < LOADED) {
-						readyState = component.readyState = LOADED;
+					if (readyState < STARTED) {
+						readyState = component.readyState = DEFINED;
 					}
 					if (typeof pub.run == "function")  {
-						if (readyState < RUNNING) {
+						if (readyState < STARTED) {
 							pub.run();
-							component.readyState = RUNNING;
+							component.readyState = STARTED;
 						}
 					} else {
 						console.log(component.name + " did not define a run() method");
 					}
 				} else {
 					console.warn(component.name + ' did not define an interface');
+					component.readyState = INITIALISED;
 				}
 			}
 		}
@@ -115,6 +117,16 @@ define(function() {
 			if (!id) node.id = id = 'ui-' + idSequence ++;
 			document.body.appendChild(node);
 			return $('#'+node.id);
+		},
+
+		addons: function() {
+			var addons = [];
+			for (var k in _r) {
+				if (_r.hasOwnProperty(k)) {
+					addons.push(_r[k]);
+				}
+			}
+			return addons;
 		}
 	};
 });
