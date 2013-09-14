@@ -17,7 +17,8 @@ UI.define([
 		tHealth = { node: pUF.children('#t-health'), value: 100 },
 		xp = { bubs: pUF.children('#p-bubs'), bar: pUF.children('#p-bar'), value: 0 },
 		name = { node: pUF.children('#p-name'), value: '' },
-		target = { node: pUF.children('#t-name'), value: '' };
+		target = { node: pUF.children('#t-name'), value: '' },
+		handle = pUF.children('#draghandle');
 
 	// Initialise widths
 	health.width = health.node.width();
@@ -73,7 +74,7 @@ UI.define([
 		}
 	}
 
-	pUF.draggable();				// make chatbox draggable
+	pUF.draggable({distance:0,handle:handle});				// make chatbox draggable
 
 	// Due to a circular dependance on chatbox and playerframe, we
 	// have to give the chatbox chance to load 

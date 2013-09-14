@@ -1,0 +1,8 @@
+#!/bin/bash
+rm -rf /tmp/guif && mkdir /tmp/guif && cd /tmp/guif && {
+	svn --force export http://game-ui-framework.googlecode.com/svn/branches/ . && {
+		( cd alpha 2>/dev/null && tar cvfz /var/www/downloads/guif-alpha.tgz . )
+		( cd beta 2>/dev/null && tar cvfz /var/www/downloads/guif-beta.tgz . )
+		( cd stable 2>/dev/null && tar cvfz /var/www/downloads/guif-stable.tgz . )
+	}
+}
