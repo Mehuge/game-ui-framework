@@ -4,6 +4,8 @@ UI.define(['text!./_window.css','text!./_window.html'],function(css,html){
 		create: function(options) {
 			var w = UI.html(html,{id:options.id});
 			w.content = w.children('div');	// child element is where content goes
+			if (options.hasChrome) w.addClass('ui-has-chrome');
+			if (options.hasBorder) w.addClass('ui-has-border');
 			if (options.html) w.content.html(options.html);
 			if (options.className) w.addClass(options.className);
 			if (options.css) w.css(options.css);
