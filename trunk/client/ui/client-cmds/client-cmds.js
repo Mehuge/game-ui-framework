@@ -9,6 +9,15 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 		case "reloadui":
 			location.reload();
 			return true;
+		case "youtube": case "yt":
+			UI.require([ 'youtube' ], function(youtube) {
+				if (s.length > 1) {
+					youtube.play(s[1]);
+				} else {
+					youtube.hide();
+				}
+			});
+			return true;
 		}
 	});
 });
