@@ -1,5 +1,5 @@
 "use strict";
-UI.define([ 'std' ], function(std) {
+UI.define([ ], function() {
 	var _nick = "Player_"+((Math.random()*100)|0);
 	var exports = {
 		"chat-box": [5,5],						// position relative to bottom left
@@ -7,7 +7,7 @@ UI.define([ 'std' ], function(std) {
 		nick: function(n) {
 			if (n) {
 				_nick = n;
-				std.pub("PLAYER_NICK_CHANGED", _nick);
+				UI.pub("PLAYER_NICK_CHANGED", _nick);
 			}
 			return _nick;
 		}

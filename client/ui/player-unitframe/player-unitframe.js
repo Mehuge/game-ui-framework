@@ -1,11 +1,10 @@
 "use strict";
 UI.define([
-	'std',
 	'state',
 	'chatbox',
 	'text!./style.css',
 	'text!./unitframe.html'
-], function(std, state, chatbox, css, html) {
+], function(state, chatbox, css, html) {
 
 	UI.css(css);
 	var pUF = UI.html(html);
@@ -83,7 +82,7 @@ UI.define([
 
 	// Register for player nickname changes, and update player nick
 	// in player frame
-	std.sub("PLAYER_NICK_CHANGED", function(nick) {
+	UI.sub("PLAYER_NICK_CHANGED", function(nick) {
 		exports.setName(nick);
 	});
 

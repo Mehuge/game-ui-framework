@@ -114,7 +114,7 @@ UI.define([
 
 	// Subscribe to player nick name change events, and tell the chat server 
 	// the new nickname if we get one
-	std.sub("PLAYER_NICK_CHANGED", function(nick) {
+	UI.sub("PLAYER_NICK_CHANGED", function(nick) {
 		channel.nick(nick);
 	});
 
