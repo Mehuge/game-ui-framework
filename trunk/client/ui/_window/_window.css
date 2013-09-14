@@ -3,7 +3,7 @@
 		background-color: black; opacity: 0.7;
 		border: 2px solid silver;
 		border-radius: 10px;
-		padding: 10px; 
+		padding: 10px; padding-right: 5px; 
 		font-size: 12px; 
 		}
 .ui-w>div { padding: 0; overflow: auto; height: 100%; width: 100%; }
