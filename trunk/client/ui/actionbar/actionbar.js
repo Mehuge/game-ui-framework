@@ -13,7 +13,7 @@ UI.define(['_window','text!./bar.css','text!./bar.html' ], function(window, css,
 			});
 		}
 		w.show();
-		bottom += w.height() + 15;
+		bottom += w.height() + 13;
 	}
 	return {
 	};
