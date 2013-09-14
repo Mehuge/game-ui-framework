@@ -99,10 +99,12 @@ define(function() {
 		},
 
 		// UI.html(htmlText) - adds HTML to the UI body
-		html: function(html) {
+		html: function(html, options) {
 			var div = document.createElement('div');
 			div.innerHTML = html;
-			var node = div.firstChild, id = node.id;
+			var node = div.firstChild;
+			if (options && options.id) node.id = options.id;
+			var id = node.id;
 			if (!id) node.id = id = 'ui-' + idSequence ++;
 			document.body.appendChild(node);
 			return $('#'+node.id);
