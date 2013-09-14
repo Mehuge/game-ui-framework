@@ -74,7 +74,7 @@ UI.define([
 		}
 	}
 
-	pUF.draggable({distance:0,handle:handle});				// make chatbox draggable
+	pUF.draggable({distance:0,handle:handle,containment:'window'});				// make chatbox draggable
 
 	// Due to a circular dependance on chatbox and playerframe, we
 	// have to give the chatbox chance to load 
