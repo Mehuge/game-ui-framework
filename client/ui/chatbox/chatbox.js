@@ -1,6 +1,6 @@
 "use strict";
 UI.define([
-	'keyboard',						// ui/keyboard/keyboard.js
+	'_keyboard',					// ui/keyboard/keyboard.js
 	'std',							// ui/std/std.js
 	'state',						// ui/state/state.js
 	'chat',							// ui/chat/chat.js
@@ -102,9 +102,10 @@ UI.define([
 	input.on('keydown', keyDown);
 	// and stop global keypress handler getting fired for stuff typed into chat box
 	input.on('keypress', function(e) { e.stopPropagation(); });
+	input.on('mousedown', function(e) { input.focus(); });
 
 	// Initialise chat window
-	chatBox.draggable();				// make chatbox draggable
+	chatBox.draggable({ cancel: '#messages', containment: 'window' });				// make chatbox draggable
 	exports.select(0);				// make sure general tab is selected
 	input.focus();
 
