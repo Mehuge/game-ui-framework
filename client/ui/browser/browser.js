@@ -3,9 +3,9 @@ UI.define([ 'chatbox', 'text!./embed.html', 'text!./embed.css' ], function(chatb
 	var frame = UI.html(html), iframe = frame.children();
 	frame.draggable();
 	return { 
-		play: function(video) {
-			chatbox.println('Playing video ' + video, { color: "yellow" });
-			iframe[0].src = "//www.youtube.com/embed/"+video+"?controls=0&rel=0&showinfo=0";
+		go: function(url) {
+			chatbox.println('Loading URL ' + url, { color: "yellow" });
+			iframe[0].src = url;
 			this.show();
 		},
 		show: function() {

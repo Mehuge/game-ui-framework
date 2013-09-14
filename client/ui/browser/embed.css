@@ -1,0 +1,8 @@
+#browser { 
+	display: none;
+	position: absolute; width: 80%; height: 80%; top: 10%; left: 10%; 
+	background-color: black;
+	box-shadow: 0px 0px 20px 5px #000;
+}
+#browser iframe { position: absolute; width: 96%; height: 96%; left: 2%; top:2%; }
+
