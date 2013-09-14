@@ -7,7 +7,8 @@ define(function() {
 	var registered = {},
 		LOADING = 0,
 		LOADED = 1,
-		RUNNING = 2;
+		RUNNING = 2,
+		idSequence = 0;
 
 	// Give a module name of a component, find the component entry in
 	// the registry.  if the module is not for a component, return 
@@ -143,6 +144,7 @@ define(function() {
 			var div = document.createElement('div');
 			div.innerHTML = html;
 			var node = div.firstChild, id = node.id;
+			if (!id) node.id = id = 'ui-' + idSequence ++;
 			document.body.appendChild(node);
 			return $('#'+node.id);
 		}
