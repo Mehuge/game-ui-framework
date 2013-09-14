@@ -33,10 +33,14 @@ Each dependency listed is loaded and a reference to it passed as an argument to 
 We have our very basic *HelloWorld* UI at this point.  However to load it we need to tell the UI framework to load it.  To do this, add helloworld as an entry in *autostart.js*
 
 {{{
-require([ 'helloworld' ]);
+UI.require([ 'helloworld' ]);
 }}}
 
 Because we specified *ChatBox* as a dependancy, it will automatically be loaded by the UI framework, and doesn't need to be specified as an autostart component, however as we probably always want to see the *ChatBox* UI we would probably add it anyway.
+
+{{{
+UI.require([ 'chatbox', 'helloworld' ]);
+}}}
 
 = Step 3: Define our public interface =
 
