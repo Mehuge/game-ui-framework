@@ -116,4 +116,6 @@ UI.define([ 'chatbox' ], function(chatbox) {
 });
 }}}
 
+The *run()* method is automatically called by the UI framework once the component has loaded and been initialised (defined its public interface).
+
 And that's it, our *HelloWorld* UI component is complete.  It says hello world when its loaded, and allows other UI components to use it to also say hello world.
