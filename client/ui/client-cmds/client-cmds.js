@@ -27,6 +27,11 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 				}
 			});
 			return true;
+		case "addons":
+			UI.require([ 'addons' ], function(addons) {
+				addons.toggle();
+			});
+			return true;
 		}
 	});
 });
