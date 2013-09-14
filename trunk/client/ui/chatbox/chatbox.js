@@ -104,7 +104,7 @@ UI.define([
 	input.on('keypress', function(e) { e.stopPropagation(); });
 
 	// Initialise chat window
-	chatBox.draggable();				// make chatbox draggable
+	chatBox.draggable({ cancel: '#messages' });				// make chatbox draggable
 	exports.select(0);				// make sure general tab is selected
 	input.focus();
 
