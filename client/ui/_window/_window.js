@@ -8,7 +8,7 @@ UI.define(['text!./_window.css','text!./_window.html'],function(css,html){
 			if (options.className) w.addClass(options.className);
 			if (options.css) w.css(options.css);
 			if (options.draggable) {
-				var draggable = { containment: 'window', refreshPositions: true };
+				var draggable = { containment: 'window', refreshPositions: true, stack: '.ui-w' };
 				if (typeof options.draggable == "object") UI.mixin(draggable, options.draggable);
 				w.draggable(draggable);
 			}
