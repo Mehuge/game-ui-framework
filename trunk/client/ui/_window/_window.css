@@ -1,0 +1,16 @@
+.ui-w { display: none; position: absolute; 
+		color: white;
+		background-color: black; opacity: 0.7;
+		border: 2px solid silver;
+		border-radius: 10px;
+		padding: 10px; 
+		font-size: 12px; 
+		}
+.ui-w>div { padding: 0; overflow: auto; height: 100%; width: 100%; }
+.ui-w>div h1 { font-size: 110%; }
+.ui-w>div h2 { font-size: 108%; }
+.ui-w>div h3 { font-size: 106%; }
+.ui-w>div h4 { font-size: 104%; }
+.ui-w>div a { color: white; }
+.ui-w>div a:visited { color: silver; }
+.ui-w>div a:hover { color: yellow; }
