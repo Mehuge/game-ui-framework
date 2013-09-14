@@ -7,6 +7,5 @@ UI.require([
 	'client-cmds',
 	'server-cmds',
 	'simulation',
-	'download',
-	'youtube'
+	'download'
 ]);
