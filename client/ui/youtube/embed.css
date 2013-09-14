@@ -1,7 +1,7 @@
-#pure-imagination { 
+#youtube { 
 	position: absolute; width: 290px; height: 165px; top: 20px; left: 20px; 
 	background-color: black;
 	box-shadow: 0px 0px 20px 5px #000;
 }
-#pure-imagination iframe { position: absolute; left: 5px; top: 5px; width: 280px; height: 155px; }
+#youtube iframe { position: absolute; left: 5px; top: 5px; width: 280px; height: 155px; }
 
