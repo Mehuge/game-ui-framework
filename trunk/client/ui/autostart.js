@@ -1,0 +1,12 @@
+UI.require([ 
+	'background', 
+	'keyboard',
+	'chatbox',
+	'player-unitframe',
+	'helloworld',
+	'client-cmds',
+	'server-cmds',
+	'simulation',
+	'download',
+	'youtube'
+]);
