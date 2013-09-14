@@ -12,7 +12,7 @@ UI.define(['_window','text!./bar.css','text!./bar.html' ], function(window, css,
 		if (bar>0) {
 			var l = bar == 1 ? 'S' : 'C';
 			w.content.children().each(function(i,n) {
-				n.textContent = l+'-'+n.textContent;
+				n.textContent = l+' '+n.textContent;
 			});
 		}
 		w.show();
