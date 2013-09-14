@@ -4,11 +4,11 @@
 			font-family: Arial; 
 			display: none;
 		 }
-#chatbox #tabs { height: 16px; font-size: 13px; }
+#chatbox #tabs { height: 16px; font-size: 13px; cursor: move; }
 #chatbox .has-background { background-color: black; opacity: 0.7; }
 #chatbox #messages { height: 184px; overflow: auto; font-size: 80%; font-weight: normal;
 			border: 1px solid #444; box-sizing: border-box; } 
-#chatbox #messages>div { display: none; position: relative; }
+#chatbox #messages>div { display: none; position: relative; margin-left: 0.2em; }
 #chatbox #messages>div.selected { display: block; }
 #chatbox #messages span.system { font-style: italic; }
 #chatbox #messages span.nick { color: #888; }
@@ -22,11 +22,3 @@
 #chatbox .tab-buttons .selected { color: yellow; }
 #chatbox .spam { color: #400; }
 #chatbox .muted { color: #111; }
-
-#chatbox ::-webkit-scrollbar              { width: 5px; }
-#chatbox ::-webkit-scrollbar-button       { display: none; }
-#chatbox ::-webkit-scrollbar-track        { }
-#chatbox ::-webkit-scrollbar-track-piece  { background-color: #111; }
-#chatbox ::-webkit-scrollbar-thumb        { background-color: #444; }
-#chatbox ::-webkit-scrollbar-corner       { }
-#chatbox ::-webkit-resizer                { }
