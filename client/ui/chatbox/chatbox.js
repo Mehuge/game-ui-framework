@@ -1,6 +1,6 @@
 "use strict";
 UI.define([
-	'keyboard',						// ui/keyboard/keyboard.js
+	'_keyboard',					// ui/keyboard/keyboard.js
 	'std',							// ui/std/std.js
 	'state',						// ui/state/state.js
 	'chat',							// ui/chat/chat.js

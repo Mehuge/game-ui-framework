@@ -1,0 +1,14 @@
+#guide { display: none; position: absolute; width: 300px; height: 400px; 
+		top: 10%; left: 60%;
+		color: white;
+		background-color: black; opacity: 0.7; overflow: auto; 
+		border: 2px solid silver;
+		padding: 0.2em; 
+		}
+#guide h1 { font-size: 110%; }
+#guide h2 { font-size: 108%; }
+#guide h3 { font-size: 106%; }
+#guide h4 { font-size: 104%; }
+#guide a { color: white; }
+#guide a:visited { color: silver; }
+#guide a:hover { color: yellow; }
