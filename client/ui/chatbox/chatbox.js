@@ -102,6 +102,7 @@ UI.define([
 	input.on('keydown', keyDown);
 	// and stop global keypress handler getting fired for stuff typed into chat box
 	input.on('keypress', function(e) { e.stopPropagation(); });
+	input.on('mousedown', function(e) { input.focus(); });
 
 	// Initialise chat window
 	chatBox.draggable({ cancel: '#messages', containment: 'window' });				// make chatbox draggable

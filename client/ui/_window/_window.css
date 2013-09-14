@@ -6,7 +6,8 @@
 		padding: 10px; padding-right: 5px; 
 		font-size: 12px; 
 		}
-.ui-w>div { padding: 0; overflow: auto; height: 100%; width: 100%; }
+.ui-w.ui-draggable { cursor: move; }
+.ui-w>div { padding: 0; overflow: auto; height: 100%; width: 100%; cursor: auto; }
 .ui-w>div h1 { font-size: 130%; }
 .ui-w>div h2 { font-size: 120%; }
 .ui-w>div h3 { font-size: 110%; }

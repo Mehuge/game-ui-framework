@@ -1,7 +1,6 @@
 UI.define(['_keyboard','_window','text!./guide.css','text!./guide.html'],function(keyboard,window,css,html){
 	UI.css(css);
-	var guide = window.create('guide',html);
-	guide.draggable({containment:'window'});
+	var guide = window.create({ id: 'guide', html: html, draggable: { cancel: '#guide>div' } });
 	keyboard.onkey(105,function(event) {
 		if (guide[0].style.display == 'block') {
 			exports.hide();
