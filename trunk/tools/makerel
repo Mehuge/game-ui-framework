@@ -5,4 +5,8 @@ rm -rf /tmp/guif && mkdir /tmp/guif && cd /tmp/guif && {
 		( cd beta 2>/dev/null && tar cvfz /var/www/downloads/guif-beta.tgz . )
 		( cd stable 2>/dev/null && tar cvfz /var/www/downloads/guif-stable.tgz . )
 	}
+	svn export http://game-ui-framework.googlecode.com/svn/trunk/ trunk && {
+		( cd trunk 2>/dev/null && tar cvfz /var/www/downloads/guif-trunk.tgz . )
+	}
+	rm -rf /tmp/guif
 }
