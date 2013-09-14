@@ -89,6 +89,13 @@ define(function() {
 			_require(_c2m(components), constructor);
 		},
 
+		// UI.mixin(dest, source) - mixes source properties into dest object
+		mixin: function(d,s) {
+			for (var k in s) {
+				if (s.hasOwnProperty(k)) d[k] = s[k];
+			}
+		},
+
 		// UI.css(cssText) - adds CSS styles to UI header
 		css: function(css) {
 			var style = document.createElement("style");
