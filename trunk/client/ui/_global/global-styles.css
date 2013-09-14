@@ -1,0 +1,9 @@
+* { font-family: Arial }
+
+::-webkit-scrollbar              { width: 5px; }
+::-webkit-scrollbar-button       { display: none; }
+::-webkit-scrollbar-track        { }
+::-webkit-scrollbar-track-piece  { background-color: #111; }
+::-webkit-scrollbar-thumb        { background-color: #444; }
+::-webkit-scrollbar-corner       { }
+::-webkit-resizer                { }
