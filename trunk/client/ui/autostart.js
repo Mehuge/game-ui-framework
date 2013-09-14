@@ -4,6 +4,7 @@ UI.require([
 	'_keyboard',
 	'chatbox',
 	'player-unitframe',
+	'actionbar',
 	'helloworld',
 	'client-cmds',
 	'server-cmds',
