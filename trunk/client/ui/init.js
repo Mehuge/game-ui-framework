@@ -10,6 +10,9 @@ define(function() {
 		STARTED = 3,
 		idSequence = 0;				// auto id sequence
 
+	// pub/sub topics
+	var topics = {};
+
 	// Once modules are loaded, this function is called to check if its a
 	// component and if it is, start it by calling the run() method, if its
 	// not already been started.
@@ -119,6 +122,7 @@ define(function() {
 			return $('#'+node.id);
 		},
 
+		// list loaded addons
 		addons: function() {
 			var addons = [];
 			for (var k in _r) {
@@ -127,6 +131,25 @@ define(function() {
 				}
 			}
 			return addons;
+		},
+
+		// A simple pub/sub system, allows passing of UI events around in a uncoupled way
+		// so mods don't need to be aware of each other, only the even they fire.
+		pub: function(topic, content) {
+			topic = topics[topic];
+			if (topic) {
+				for (var i = 0; i < topic.handlers.length; i++) {
+					try { 
+						(topic.handlers[i])(content, topic);
+					} catch(e) {
+						console.error(e);
+					}
+				}
+			}
+		},
+		sub: function(topic, handler) {
+			(topics[topic] = topics[topic] || { topic: topic, handlers: [] }).handlers.push(handler);
 		}
+
 	};
 });
