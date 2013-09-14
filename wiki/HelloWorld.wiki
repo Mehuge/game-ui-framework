@@ -66,9 +66,11 @@ UI.define([ 'chatbox' ], function(chatbox) {
 
 Other components must specify hello world as a dependency to be able to access the *sayHello()* method, for example:-
 
+{{{
 UI.define([ 'helloworld', function(helloworld) {
   helloworld.sayHello();
 });
+}}}
 
 Alternatively, *HelloWorld* can expose its interface via the UI global object, as follows:-
 
