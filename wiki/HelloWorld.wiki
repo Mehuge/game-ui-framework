@@ -30,7 +30,7 @@ UI.define( 'chatbox' ], function(chatbox) {
 
 Each dependency listed is loaded and a reference to it passed as an argument to the constructor function.  The order of the dependencies and the reference arguments must match exactly, otherwise bad things will happen (script errors).
 
-We have our very basic *HelloWorld* UI at this point.  However to load it we need to tell the UI framework to load it.  To do this, add helloworld as an entry in the autostart.js
+We have our very basic *HelloWorld* UI at this point.  However to load it we need to tell the UI framework to load it.  To do this, add helloworld as an entry in *autostart.js*
 
 {{{
 require([ 'helloworld' ]);
