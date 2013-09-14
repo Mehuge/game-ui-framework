@@ -18,6 +18,15 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 				}
 			});
 			return true;
+		case "go":
+			UI.require([ 'browser' ], function(browser) {
+				if (s.length > 1) {
+					browser.go(s[1]);
+				} else {
+					browser.hide();
+				}
+			});
+			return true;
 		}
 	});
 });
