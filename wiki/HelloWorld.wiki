@@ -18,7 +18,7 @@ UI.define([], function() {
 
 UI.define() will call the passed constructor function, who's return value defines the public interface for the component.
 
-= Step 2: Add dependancies ==
+= Step 2: Add dependancies =
 
 Because our *HelloWorld* UI wants to send a message to the *ChatBox*, we need to be able to talk to the *ChatBox* UI.  The simplest way to do this is to specify *ChatBox* as a dependency.  Doing this will ensure that the *ChatBox* UI is loaded before our *HelloWorld* UI is initialised.  To do this we add a dependency list to the first argument of UI.define():-
 
@@ -86,7 +86,7 @@ UI.define([ 'chatbox' ], function(chatbox) {
 
 Now, other components can now call *UI.HelloWorld.sayHello()* directly, but only if they know *HelloWorld* component has been loaded.
 
-Step 4: Autostarting
+=Step 4: Autostarting=
 
 Our *HelloWorld* component doesn't do much at this point, but it does allow other components to say hello.  What if we want to say hello ourselves when we load.  Well we could do the following:-
 
