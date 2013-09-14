@@ -1,4 +1,4 @@
-.action-bar { padding: 5px; height: 32px; margin-left: -275px; }
+.action-bar { padding: 5px; height: 32px; margin-left: -275px; border-color: #444; border-radius: 5px; }
 .action-bar>div { overflow: hidden; }
 .action-bar span { 
 	padding: 2px;
