@@ -4,8 +4,8 @@ UI.define(['_window','text!./bar.css','text!./bar.html' ], function(window, css,
 	for (var bar = 0; bar < 3; bar++) {
 		var w = window.create('ab'+bar,html);
 		w.addClass('action-bar');
-		w.draggable();
-		w.css({left:'60%',bottom: bottom+'px'});
+		w.draggable({containment:'window'});
+		w.css({left:'40%',bottom: bottom+'px'});
 		if (bar>0) {
 			var l = bar == 1 ? 'S' : 'C';
 			w.content.children().each(function(i,n) {
