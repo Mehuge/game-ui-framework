@@ -9,6 +9,11 @@ UI.define([
 	UI.css(css);
 	var pUF = UI.html(html);
 
+	pUF.css(state.get('player-unitframe-position', {}));			// {} use CSS as default position
+	pUF.on("dragstop", function(event, ui) {
+		state.set('player-unitframe-position', UI.anchor(pUF, ui.position));
+	});
+
 	// Private data
 	var health = { node: pUF.children('#p-health'), value: 100 },
 		endurance = { node: pUF.children('#p-endurance'), value: 100 },
