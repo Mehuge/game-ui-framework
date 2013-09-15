@@ -32,12 +32,11 @@ UI.define([], function() {
 
 			return {
 				chat: function(message) {
-					console.log('send ' + message);
+					console.log('> ' + message);
 					chat.send(JSON.stringify({ t: 'chat', m: message }));
 				},
 
 				nick: function(nick) {
-					console.log('set nickname to ' + nick);
 					chat.send(JSON.stringify({ t: 'nick', n: nick }));
 				}
 			}
