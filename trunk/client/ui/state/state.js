@@ -51,5 +51,8 @@ UI.define([ ], function() {
 		UI.pub("PLAYER_NICK_CHANGED", v);
 	});
 
+	// fire a name change event so cuAPI picks up loaded nick
+	UI.pub("PLAYER_NICK_CHANGED", state.nick);
+
 	return UI.state = exports;
 });

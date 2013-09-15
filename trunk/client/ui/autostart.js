@@ -9,7 +9,6 @@ UI.require([
 	'helloworld',
 	'client-cmds',
 	'server-cmds',
-	'simulation',
 	'guide',
 	'download'
 ]);
