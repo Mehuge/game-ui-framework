@@ -32,6 +32,31 @@ UI.define([
 	xp.bubsWidth = xp.bubs.width();
 	xp.barWidth = xp.bar.width();
 
+	function setHealth(pct) {
+		health.node.width((health.width*pct/100)|0);
+	};
+	function setEndurance(pct) {
+		endurance.node.width((endurance.width*pct/100)|0);
+	};
+	function setMana(pct) {
+		mana.node.width((mana.width*pct/100)|0);
+	};
+	function setTargetHealth(pct) {
+		tHealth.node.width((tHealth.width*pct/100)|0);
+	};
+	function setXP(pct) {
+		xp.value = pct;
+		var bw = ((pct/10)|0)*10, ba = (pct-bw)*10;
+		xp.bubs.width((xp.bubsWidth*bw/100)|0);
+		xp.bar.width((xp.barWidth*ba/100)|0);
+	};
+	function setName(nick) {
+		name.node.text(nick);
+	};
+	function setTargetName(name) {
+		target.node.text(name);
+	};
+
 	// Public interface
 	var exports = {
 		run: function() {
@@ -42,39 +67,6 @@ UI.define([
 		},
 		hide: function() {
 			pUF.css({ display: 'none' });
-		},
-		getHealth: function() { return health.value; },
-		setHealth: function(pct) {
-			health.value = pct;
-			health.node.width((health.width*pct/100)|0);
-		},
-		getEndurance: function() { return endurance.value; },
-		setEndurance: function(pct) {
-			endurance.value = pct;
-			endurance.node.width((endurance.width*pct/100)|0);
-		},
-		getMana: function() { return mana.value; },
-		setMana: function(pct) {
-			mana.value = pct;
-			mana.node.width((mana.width*pct/100)|0);
-		},
-		getTargetHealth: function() { return tHealth.value; },
-		setTargetHealth: function(pct) {
-			tHealth.value = pct;
-			tHealth.node.width((tHealth.width*pct/100)|0);
-		},
-		getXP: function() { return xp.value; },
-		setXP: function(pct) {
-			xp.value = pct;
-			var bw = ((pct/10)|0)*10, ba = (pct-bw)*10;
-			xp.bubs.width((xp.bubsWidth*bw/100)|0);
-			xp.bar.width((xp.barWidth*ba/100)|0);
-		},
-		setName: function(nick) {
-			name.node.text(nick);
-		},
-		setTargetName: function(name) {
-			target.node.text(name);
 		}
 	}
 
@@ -83,12 +75,17 @@ UI.define([
 	// Due to a circular dependance on chatbox and playerframe, we
 	// have to give the chatbox chance to load 
 	chatbox.system('daoc style player unit frame loaded');
-	exports.setName(state.nick);
 
-	// Register for player nickname changes, and update player nick
-	// in player frame
-	UI.sub("PLAYER_NICK_CHANGED", function(nick) {
-		exports.setName(nick);
+	// Subscribe to the game tick topic, is called whenever updated game information
+	// is available, we update our player frame with the latest info
+	UI.sub("GAME_TICK", function(cuAPI) {
+		setHealth((cuAPI.hp*100/cuAPI.maxHP)|0);
+		setEndurance((cuAPI.endurance*100/cuAPI.maxEndurance)|0);
+		setMana((cuAPI.mana*100/cuAPI.maxMana)|0);
+		setTargetHealth((cuAPI.targetHP*100/cuAPI.maxTargetHP)|0);
+		setTargetName(cuAPI.targetName);
+		setName(cuAPI.name);
+		setXP(cuAPI.xp*100/cuAPI.maxXP);
 	});
 
 	// Return the public interface
