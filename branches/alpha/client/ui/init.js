@@ -1,7 +1,7 @@
 "use strict";
 // Initialise the UI, defines the global UI object which provides the UI javascript interface
 // and provides a method of loading the UI components
-define(function() {
+define(function(global) {
 
 	var _r = {}, _m = {},			// registered components and module map
 		LOADING = 0,				// ready states
@@ -152,6 +152,48 @@ define(function() {
 		},
 		sub: function(topic, handler) {
 			(topics[topic] = topics[topic] || { topic: topic, handlers: [] }).handlers.push(handler);
+		},
+
+		// Given an options, and a query position, return the css properties to have this
+		// element suitably anchored to the closest edges of the window
+		anchor: function(o, p) {
+
+			// get component size
+			var s = { w: o.outerWidth(), h: o.outerHeight() },							
+
+				// window size
+				w = $(this.window), ws = { w: w.innerWidth(), h: w.innerHeight() },
+
+				// center point of the component in the window
+				c = { x: p.left+(s.w/2), y: p.top+(s.h/2) },
+
+				// center point of the window
+				c2 = { x: ws.w/2, y: ws.h/2 },
+
+				// Work out how to anchor the component
+				anchor = {
+					h: c.x < c2.x ? 'left' : 'right',
+					v: c.y < c2.y ? 'top' : 'bottom'
+				};
+
+			// initialise positioning properties
+			var pos = { left: 'auto', right: 'auto', top: 'auto', bottom: 'auto' };
+
+			// calculate positions based on how we want the element anchored
+			switch(anchor.h) {
+			case 'left': 	pos.left = p.left + 'px'; break;
+			case 'right': 	pos.right = (ws.w-(p.left+s.w)) + 'px'; break;
+			}
+			switch(anchor.v) {
+			case 'top': 	pos.top = p.top + 'px'; break;
+			case 'bottom':  pos.bottom = (ws.h-(p.top+s.h)) + 'px'; break;
+			}
+
+			// (re)position this element
+			o.css(pos);
+
+			// return new position
+			return pos;
 		}
 
 	};
