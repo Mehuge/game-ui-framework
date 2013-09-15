@@ -78,7 +78,7 @@ UI.define([
 	// Due to a circular dependance on chatbox and playerframe, we
 	// have to give the chatbox chance to load 
 	chatbox.system('daoc style player unit frame loaded');
-	exports.setName(state.nick());
+	exports.setName(state.nick);
 
 	// Register for player nickname changes, and update player nick
 	// in player frame

@@ -4,7 +4,7 @@ UI.define([ ], function() {
 	var storage = localStorage,
 		domain = "com.google.code.game-ui-framework",
 		key = domain + '.state',
-		state;
+		state;			// internal version of the state object (the actual state)
 
 	try {
 		state = JSON.parse(storage.getItem(key));
@@ -23,16 +23,7 @@ UI.define([ ], function() {
 		saveState();
 	}
 
-	var exports = {
-
-		nick: function(n) {
-			if (n) {
-				state.nick = n;
-				saveState();
-				UI.pub("PLAYER_NICK_CHANGED", n);
-			}
-			return state.nick;
-		},
+	var exports = {		// external version of the stat object (the public interface)
 
 		get: function(n,d) {
 			var v = state[n];
@@ -46,6 +37,14 @@ UI.define([ ], function() {
 		}
 
 	};
+
+	// state.nick: Setup getter/setter
+	exports.__defineGetter__("nick", function() { return state.nick; });
+	exports.__defineSetter__("nick", function(v) { 
+		state.nick = v;
+		saveState();
+		UI.pub("PLAYER_NICK_CHANGED", v);
+	});
 
 	return exports;
 });
