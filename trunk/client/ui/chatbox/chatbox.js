@@ -51,6 +51,9 @@ UI.define([
 		},
 		system: function(m) {
 			this.println('<span class="system">' + m + '</span>');
+		},
+		who: function(f) {
+			channel.who(function(a) { f(a); });
 		}
 	}
 

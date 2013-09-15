@@ -73,7 +73,14 @@ function Channel(name) {
 				client.connection.sendUTF(JSON.stringify(message));
 			}
 		},
-		name: function() { return name; }
+		name: function() { return name; },
+		who: function(client, id) {
+			var who = [];
+			for (var i = 0; i < clients.length; i++) {
+				who.push(clients[i].nick);
+			}
+			client.connection.sendUTF(JSON.stringify({ t: 'who', who: who, id: id }));
+		}
 	};
 };
 
@@ -138,6 +145,9 @@ wsServer.on('request', function(request) {
 					case 'chat':
 						m.n = client.nick;
 						channel.chat(client, m);
+						break;
+					case 'who':
+						channel.who(client, m.id);
 						break;
 					case 'nick':
 						m.m = client.nick + ' changed nick to ' + m.n;
