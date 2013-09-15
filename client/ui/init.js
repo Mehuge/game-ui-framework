@@ -132,14 +132,14 @@ define(function(global) {
 		// A simple pub/sub system, allows passing of UI events around in a uncoupled way
 		// so mods don't need to be aware of each other, only the event they fire.
 		pub: function(topic, content) {
-			var log = "[" + topic;
-			topic = topics[topic];
+			var log = "[" + topic,
+				handlers = topics[topic];
 			try { log += " " + JSON.stringify(content); } catch(e) { };
 			console.log(log+"]");
-			if (topic) {
-				for (var i = 0; i < topic.handlers.length; i++) {
+			if (handlers) {
+				for (var i = 0; i < handlers.length; i++) {
 					try { 
-						(topic.handlers[i])(content, topic);
+						(handlers[i])(content, topic);
 					} catch(e) {
 						console.error(e);
 					}
@@ -147,7 +147,7 @@ define(function(global) {
 			}
 		},
 		sub: function(topic, handler) {
-			(topics[topic] = topics[topic] || { topic: topic, handlers: [] }).handlers.push(handler);
+			(topics[topic] = topics[topic] || []).push(handler);
 		},
 
 		// Given an options, and a query position, return the css properties to have this
