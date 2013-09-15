@@ -1,11 +1,10 @@
 "use strict";
 UI.define([
-	'std',
 	'state',
 	'chatbox',
 	'text!./style.css',
 	'text!./unitframe.html'
-], function(std, state, chatbox, css, html) {
+], function(state, chatbox, css, html) {
 
 	UI.css(css);
 	var pUF = UI.html(html);
@@ -79,11 +78,11 @@ UI.define([
 	// Due to a circular dependance on chatbox and playerframe, we
 	// have to give the chatbox chance to load 
 	chatbox.system('daoc style player unit frame loaded');
-	exports.setName(state.nick());
+	exports.setName(state.nick);
 
 	// Register for player nickname changes, and update player nick
 	// in player frame
-	std.sub("PLAYER_NICK_CHANGED", function(nick) {
+	UI.sub("PLAYER_NICK_CHANGED", function(nick) {
 		exports.setName(nick);
 	});
 

@@ -4,7 +4,7 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 		var s = text.split(" ");
 		switch (s[0].toLowerCase()) {
 		case "nick":
-			if (s.length > 1) state.nick(s[1]);
+			if (s.length > 1) state.nick = s[1];
 			return true;
 		case "reloadui":
 			location.reload();
@@ -24,6 +24,18 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 					browser.go(s[1]);
 				} else {
 					browser.hide();
+				}
+			});
+			return true;
+		case "addons":
+			UI.require([ 'addons' ], function(addons) {
+				addons.toggle();
+			});
+			return true;
+		case "who":
+			chatbox.who(function(a) {
+				for (var i = 0; i < a.length; i++) {
+					chatbox.println(a[i]);
 				}
 			});
 			return true;

@@ -1,5 +1,7 @@
 <h1>User Guide</h1>
 <p>This is an example user guide window implemented as a UI component.  Press I to dismiss/reopen this window.</p>
+<h2>Goals</h2>
+<p>The Goal of this UI framework is to make it easy to prototype / develop self contained UI components.  In its current form, it is not a framework for use within a game client, though it may evolve in that direction over time.</p>
 <h2>Commands</h2>
 <ui>
 <li>Type /nick name to set a nickname</li>
@@ -9,10 +11,14 @@
 <li>Press I toggle this view</li>
 <li>Press ENTER to start chat</li>
 <li>Press / to start a slash command</li>
+<li>Type /addons for a list of loaded addons</li>
 </ul>
 <h2>Draggable Components</h2>
 <p>All windows can be moved by dragging them.  Some only allow dragging from certain parts of the window.  This user guide window can be dragged by grabbing hold of any window edge.  The chat box can be moved by grabbing hold of the space beside the tabs, or the tabs themselves.</p>
 <h2>Source Code</h2>
 <p>The source code for this framework can be downloaded from <a href="https://code.google.com/p/game-ui-framework/" target="_blank">here</a></p>
-<h2>Goals</h2>
-<p>The Goal of this UI framework is to make it easy to prototype / develop self contained UI components.  In its current form, it is not a framework for use within a game client, though it may evolve in that direction over time.</p>
+<h2>Addon States</h2>
+<p>LOADING means something went wrong, as the component never finished loading.</p>
+<p>INITIALISED means the component loaded and initialised, but did not return a public interface.  This may be because it is providing functionality rather than providing an API.  An example of this are the slash command handlers, they handle slash commands but don't provide a public interface</p>
+<p>DEFINED means the component loaded, initialised and returned a public interface, but did not provide a run() method and so is not considered runnable (startable).</p>
+<p>STARTED means the component loaded, initialised, returned a public interface which included a run() method which was called and completed successfully.</p>
