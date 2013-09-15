@@ -1,4 +1,5 @@
 UI.require([ 
+	'_cuAPI', 
 	'_global', 
 	'_background', 
 	'_keyboard',
