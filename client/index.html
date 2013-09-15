@@ -2,6 +2,7 @@
 <html>
 <head>
 	<style>html, body { margin: 0; padding: 0; border: 0; overflow: hidden; }</style>
+	<link rel="stylesheet" href="lib/jquery-ui.css" />
 	<script src="lib/require.js"></script>
 	<script src="lib/require-config.js"></script>
 	<script src="lib/jquery-1.10.2.min.js"></script>
@@ -10,7 +11,7 @@
 		<script>
 			(function(global){
 				$(function() {
-					require(['ui/init' ], function(UI) {
+					require([ 'ui/init' ], function(UI) {
 						UI.window = global;
 						global.UI = UI;
 						UI.require(['ui/autostart']);
