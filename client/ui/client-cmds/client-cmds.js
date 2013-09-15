@@ -32,6 +32,13 @@ UI.define([ 'state', 'chatbox' ], function(state, chatbox) {
 				addons.toggle();
 			});
 			return true;
+		case "who":
+			chatbox.who(function(a) {
+				for (var i = 0; i < a.length; i++) {
+					chatbox.println(a[i]);
+				}
+			});
+			return true;
 		}
 	});
 });
