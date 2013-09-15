@@ -31,12 +31,10 @@ define(function() {
 					} else {
 						if (readyState < DEFINED) {
 							component.readyState = DEFINED;
-							console.log(component.name + " did not define a run() method");
 						}
 					}
 				} else {
 					if (component.readyState < INITIALISED) {
-						console.warn(component.name + ' did not define an interface');
 						component.readyState = INITIALISED;
 					}
 				}
@@ -138,7 +136,10 @@ define(function() {
 		// A simple pub/sub system, allows passing of UI events around in a uncoupled way
 		// so mods don't need to be aware of each other, only the event they fire.
 		pub: function(topic, content) {
+			var log = "[" + topic;
 			topic = topics[topic];
+			try { log += " " + JSON.stringify(content); } catch(e) { };
+			console.log(log+"]");
 			if (topic) {
 				for (var i = 0; i < topic.handlers.length; i++) {
 					try { 
