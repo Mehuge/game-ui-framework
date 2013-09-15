@@ -15,5 +15,11 @@ UI.define([], function() {
 	cuAPI.__defineGetter__("mana", function() { return player_mana; });
 	cuAPI.__defineGetter__("maxMana", function() { return max_player_mana; });
 
+	function emulate() {
+		player_health = (Math.random()*max_player_health)|0;
+		player_mana = (Math.random()*max_player_mana)|0;
+	};
+	setInterval(emulate,1000);
+
 	return cuAPI;
 });
