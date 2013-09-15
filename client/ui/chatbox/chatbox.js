@@ -19,6 +19,8 @@ UI.define([
 		currentTab = undefined,
 		handlers = [];
 
+	chatBox.css(state.get('chatbox-position', { left: '5px', bottom: '5px' }));
+
 	// Public interface
 	var exports = {
 		run: function() {
@@ -111,6 +113,11 @@ UI.define([
 	chatBox.draggable({ cancel: '#messages', containment: 'window' });				// make chatbox draggable
 	exports.select(0);				// make sure general tab is selected
 	input.focus();
+	chatBox.on("dragstop", function(event, ui) {
+		// re-position it to get correct anchroing, as drag always positions relative
+		// to top left
+		state.set('chatbox-position', UI.anchor(chatBox,ui.position));
+	});
 
 	// Connect to chat server
 	var channel = chat.connect('general', state.nick, onmessage);
