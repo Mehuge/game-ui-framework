@@ -34,6 +34,11 @@ UI.define([ ], function() {
 			state[n] = v;
 			UI.pub("STATE_CHANGED", { name: n, value: v });
 			saveState();
+		},
+
+		unset: function(n) {
+			delete state[n];
+			saveState();
 		}
 
 	};
@@ -46,5 +51,5 @@ UI.define([ ], function() {
 		UI.pub("PLAYER_NICK_CHANGED", v);
 	});
 
-	return exports;
+	return UI.state = exports;
 });
