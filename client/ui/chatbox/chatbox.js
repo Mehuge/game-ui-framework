@@ -118,6 +118,12 @@ UI.define([
 		// to top left
 		state.set('chatbox-position', UI.anchor(chatBox,ui.position));
 	});
+	chatBox.resizable();
+	chatBox.on("resize", function(event, ui) {
+		var th = tabsArea.height(),
+			ih = inputArea.height();
+		msgArea.height(ui.size.height-th-ih);
+	});
 
 	// Connect to chat server
 	var channel = chat.connect('general', state.nick, onmessage);
@@ -130,7 +136,7 @@ UI.define([
 
 	// Register for some global keypresses
 	keyboard.onkey(keyboard.RETURN, function() { input[0].focus(); return true; });							// RETURN
-	keyboard.onkey(keyboard.SLASH, function() { input[0].value = '/'; input[0].focus(); return true; });		// Slash (/)
+	keyboard.onkey(keyboard.SLASH, function() { input[0].value = '/'; input[0].focus(); return true; });	// Slash (/)
 
 	// Return the public interface
 	return UI.ChatBox = exports;
