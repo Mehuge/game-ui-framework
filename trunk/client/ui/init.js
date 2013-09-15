@@ -23,20 +23,22 @@ define(function() {
 				if (args[i]) {
 					var pub = component._i = args[i];
 					var readyState = component.readyState || LOADING;
-					if (readyState < STARTED) {
-						readyState = component.readyState = DEFINED;
-					}
 					if (typeof pub.run == "function")  {
 						if (readyState < STARTED) {
 							pub.run();
 							component.readyState = STARTED;
 						}
 					} else {
-						console.log(component.name + " did not define a run() method");
+						if (readyState < DEFINED) {
+							component.readyState = DEFINED;
+							console.log(component.name + " did not define a run() method");
+						}
 					}
 				} else {
-					console.warn(component.name + ' did not define an interface');
-					component.readyState = INITIALISED;
+					if (component.readyState < INITIALISED) {
+						console.warn(component.name + ' did not define an interface');
+						component.readyState = INITIALISED;
+					}
 				}
 			}
 		}
