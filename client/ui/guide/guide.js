@@ -6,14 +6,18 @@ UI.define(['_keyboard','_window','text!./guide.css','text!./guide.html'],functio
 			hasBorder: true,
 			draggable: { cancel: '#guide>div' }
 	});
-	keyboard.onkey(105,function(event) {
-		if (guide[0].style.display == 'block') {
-			exports.hide();
-		} else {
-			exports.show();
-		}
-	});
+	function init() {
+		keyboard.onkey(105,function(event) {
+			if (guide[0].style.display == 'block') {
+				exports.hide();
+			} else {
+				exports.show();
+			}
+			return true;
+		});
+	}
 	var exports = {
+		run: function() { init(); },
 		show: function() {
 			guide.css({display:'block'});
 		},
