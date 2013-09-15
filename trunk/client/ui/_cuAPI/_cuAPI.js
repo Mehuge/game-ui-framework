@@ -43,7 +43,7 @@ UI.define([], function() {
 		name = nick;
 	});
 
-	setInterval(emulate,1000);
+	setInterval(emulate,100);
 
 	return cuAPI;
 });
