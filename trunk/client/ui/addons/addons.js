@@ -20,6 +20,7 @@ UI.define(['_keyboard','_window','text!./style.css','text!./content.html'],funct
 		addons.content.html(html);
 	};
 	var exports = {
+		run: function() { },					// start is a no-op
 		toggle: function() {
 			if (addons[0].style.display == 'block') {
 				addons.hide();
