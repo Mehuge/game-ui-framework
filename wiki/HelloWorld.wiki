@@ -52,7 +52,7 @@ UI.define([ 'chatbox' ], function(chatbox) {
 });
 }}}
 
-So to add our *sayHello()* method we simply add it to this return value:-
+So to add our *sayHello()* method we simply add it to its return value:-
 
 {{{
 UI.define([ 'chatbox' ], function(chatbox) {
