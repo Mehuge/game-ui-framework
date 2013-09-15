@@ -134,7 +134,7 @@ define(function() {
 		},
 
 		// A simple pub/sub system, allows passing of UI events around in a uncoupled way
-		// so mods don't need to be aware of each other, only the even they fire.
+		// so mods don't need to be aware of each other, only the event they fire.
 		pub: function(topic, content) {
 			topic = topics[topic];
 			if (topic) {
