@@ -5,9 +5,13 @@ define(function() {
 
 	var _r = {}, _m = {},			// registered components and module map
 		LOADING = 0,				// ready states
-		LOADED = 1,
-		RUNNING = 2,
+		INITIALISED = 1,
+		DEFINED = 2,
+		STARTED = 3,
 		idSequence = 0;				// auto id sequence
+
+	// pub/sub topics
+	var topics = {};
 
 	// Once modules are loaded, this function is called to check if its a
 	// component and if it is, start it by calling the run() method, if its
@@ -19,19 +23,20 @@ define(function() {
 				if (args[i]) {
 					var pub = component._i = args[i];
 					var readyState = component.readyState || LOADING;
-					if (readyState < LOADED) {
-						readyState = component.readyState = LOADED;
-					}
 					if (typeof pub.run == "function")  {
-						if (readyState < RUNNING) {
+						if (readyState < STARTED) {
 							pub.run();
-							component.readyState = RUNNING;
+							component.readyState = STARTED;
 						}
 					} else {
-						console.log(component.name + " did not define a run() method");
+						if (readyState < DEFINED) {
+							component.readyState = DEFINED;
+						}
 					}
 				} else {
-					console.warn(component.name + ' did not define an interface');
+					if (component.readyState < INITIALISED) {
+						component.readyState = INITIALISED;
+					}
 				}
 			}
 		}
@@ -115,6 +120,39 @@ define(function() {
 			if (!id) node.id = id = 'ui-' + idSequence ++;
 			document.body.appendChild(node);
 			return $('#'+node.id);
+		},
+
+		// list loaded addons
+		addons: function() {
+			var addons = [];
+			for (var k in _r) {
+				if (_r.hasOwnProperty(k)) {
+					addons.push(_r[k]);
+				}
+			}
+			return addons;
+		},
+
+		// A simple pub/sub system, allows passing of UI events around in a uncoupled way
+		// so mods don't need to be aware of each other, only the event they fire.
+		pub: function(topic, content) {
+			var log = "[" + topic;
+			topic = topics[topic];
+			try { log += " " + JSON.stringify(content); } catch(e) { };
+			console.log(log+"]");
+			if (topic) {
+				for (var i = 0; i < topic.handlers.length; i++) {
+					try { 
+						(topic.handlers[i])(content, topic);
+					} catch(e) {
+						console.error(e);
+					}
+				}
+			}
+		},
+		sub: function(topic, handler) {
+			(topics[topic] = topics[topic] || { topic: topic, handlers: [] }).handlers.push(handler);
 		}
+
 	};
 });

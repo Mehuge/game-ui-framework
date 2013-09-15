@@ -51,6 +51,9 @@ UI.define([
 		},
 		system: function(m) {
 			this.println('<span class="system">' + m + '</span>');
+		},
+		who: function(f) {
+			channel.who(function(a) { f(a); });
 		}
 	}
 
@@ -110,11 +113,11 @@ UI.define([
 	input.focus();
 
 	// Connect to chat server
-	var channel = chat.connect('general', state.nick(), onmessage);
+	var channel = chat.connect('general', state.nick, onmessage);
 
 	// Subscribe to player nick name change events, and tell the chat server 
 	// the new nickname if we get one
-	std.sub("PLAYER_NICK_CHANGED", function(nick) {
+	UI.sub("PLAYER_NICK_CHANGED", function(nick) {
 		channel.nick(nick);
 	});
 

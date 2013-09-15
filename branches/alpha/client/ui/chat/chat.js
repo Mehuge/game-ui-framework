@@ -2,6 +2,7 @@
 UI.define([], function() {
 
 	var WebSocket = window.WebSocket || window.MozWebSocket;
+	var pending = {}, requestId = 0;
 
 	var exports = {
 		connect: function(channel, nick, onmessage) {
@@ -28,17 +29,29 @@ UI.define([], function() {
 				if (m.t == "chat") {
 					onmessage({ time: new Date(), nick: m.n, message: m.m, score: m.s, spamCount: m.c });
 				}
+				if (m.t == "who") {
+					var r = pending[m.id];
+					if (r) {
+						delete pending[m.id];
+						r.f(m.who);
+					}
+				}
 			};
 
 			return {
 				chat: function(message) {
-					console.log('send ' + message);
+					console.log('> ' + message);
 					chat.send(JSON.stringify({ t: 'chat', m: message }));
 				},
 
 				nick: function(nick) {
-					console.log('set nickname to ' + nick);
 					chat.send(JSON.stringify({ t: 'nick', n: nick }));
+				},
+
+				who: function(f) {
+					var id = requestId ++;
+					pending[id] = { f: f, t: new Date() };
+					chat.send(JSON.stringify({ t: 'who', id: id }));
 				}
 			}
 		}
