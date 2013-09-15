@@ -2,6 +2,7 @@
 #
 #	Run this script to download the various libraries used by the client.
 #
+test ! -d images && mkdir images
 while read target src ; do
 	case "$target" in
 	\#) ;;
