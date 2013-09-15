@@ -1,10 +1,14 @@
-UI.define(['_keyboard','_window','text!./guide.css','text!./guide.html'],function(keyboard,window,css,html){
+UI.define(['_keyboard','_window','state','text!./guide.css','text!./guide.html'],function(keyboard,window,state,css,html){
 	UI.css(css);
 	var guide = window.create({
 			id: 'guide', html: html, 
 			hasChrome: true, 
 			hasBorder: true,
 			draggable: { cancel: '#guide>div' }
+	});
+	guide.css(state.get('guide-position',{}));			// {} allows CSS to provide the default position
+	guide.on("dragstop", function(event,ui) {
+		state.set('guide-position', UI.anchor(guide, ui.position));
 	});
 	function init() {
 		keyboard.onkey(105,function(event) {
