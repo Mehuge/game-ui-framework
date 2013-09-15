@@ -110,7 +110,7 @@ UI.define([
 	input.focus();
 
 	// Connect to chat server
-	var channel = chat.connect('general', state.nick(), onmessage);
+	var channel = chat.connect('general', state.nick, onmessage);
 
 	// Subscribe to player nick name change events, and tell the chat server 
 	// the new nickname if we get one
