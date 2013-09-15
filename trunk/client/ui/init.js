@@ -103,23 +103,19 @@ define(function(global) {
 
 		// UI.css(cssText) - adds CSS styles to UI header
 		css: function(css) {
-			var style = document.createElement("style");
-			style.type = "text/css";
-			style.textContent = css;
-			document.head.appendChild(style);
-			return $(style);
+			var style = $('<style type="text/css">'+css+'</style>');
+			$(document.head).append(style);
+			return style;
 		},
 
 		// UI.html(htmlText) - adds HTML to the UI body
 		html: function(html, options) {
-			var div = document.createElement('div');
-			div.innerHTML = html;
-			var node = div.firstChild;
-			if (options && options.id) node.id = options.id;
-			var id = node.id;
-			if (!id) node.id = id = 'ui-' + idSequence ++;
-			document.body.appendChild(node);
-			return $('#'+node.id);
+			var node = $(html);
+			if (options && options.id) node.attr("id", options.id);
+			var id = node.attr("id");
+			if (!id) node.attr("id", id = 'ui-' + idSequence++);
+			$(document.body).append(node);
+			return node;
 		},
 
 		// list loaded addons
