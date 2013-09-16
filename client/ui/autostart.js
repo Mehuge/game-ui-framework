@@ -1,4 +1,5 @@
 UI.require([ 
+	'_cuAPI', 
 	'_global', 
 	'_background', 
 	'_keyboard',
@@ -8,7 +9,6 @@ UI.require([
 	'helloworld',
 	'client-cmds',
 	'server-cmds',
-	'simulation',
 	'guide',
 	'download'
 ]);

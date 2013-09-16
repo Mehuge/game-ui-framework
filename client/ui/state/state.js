@@ -34,6 +34,11 @@ UI.define([ ], function() {
 			state[n] = v;
 			UI.pub("STATE_CHANGED", { name: n, value: v });
 			saveState();
+		},
+
+		unset: function(n) {
+			delete state[n];
+			saveState();
 		}
 
 	};
@@ -46,5 +51,8 @@ UI.define([ ], function() {
 		UI.pub("PLAYER_NICK_CHANGED", v);
 	});
 
-	return exports;
+	// fire a name change event so cuAPI picks up loaded nick
+	UI.pub("PLAYER_NICK_CHANGED", state.nick);
+
+	return UI.state = exports;
 });
