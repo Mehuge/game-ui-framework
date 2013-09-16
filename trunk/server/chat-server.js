@@ -32,7 +32,17 @@ function Channel(name) {
 	var name = name;
 	var clients = [];
 	return {
+		inuse: function(client, nick) {
+			for (var i = 0; i < clients.length; i++) {
+				if (clients[i] != client && clients[i].nick == nick) {
+					return true;
+				}
+			}
+		},
 		connect: function(client) {
+			if (this.inuse(client,client.nick)) {
+				client.nick = "Player_" + ((Math.random()*100)|0);
+			}
 			clients.push(client);
 			console.log(name + ' client ' + client.nick + ' connected');
 			console.log('connected clients ' + clients.length);
@@ -150,10 +160,14 @@ wsServer.on('request', function(request) {
 						channel.who(client, m.id);
 						break;
 					case 'nick':
-						m.m = client.nick + ' changed nick to ' + m.n;
-						client.nick = m.n;
-						m.n = 'System';
-						channel.chat(client, m);
+						if (!channel.inuse(client, m.n)) {
+							m.m = client.nick + ' changed nick to ' + m.n;
+							client.nick = m.n;
+							m.n = 'System';
+							channel.chat(client, m);
+						} else {
+							connection.sendUTF(JSON.stringify({ t: 'chat', n: 'System', m: m.n + " is already in use" }));
+						}
 						break;
 					}
 				}
