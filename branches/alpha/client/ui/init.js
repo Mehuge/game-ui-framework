@@ -103,23 +103,19 @@ define(function(global) {
 
 		// UI.css(cssText) - adds CSS styles to UI header
 		css: function(css) {
-			var style = document.createElement("style");
-			style.type = "text/css";
-			style.textContent = css;
-			document.head.appendChild(style);
-			return $(style);
+			var style = $('<style type="text/css">'+css+'</style>');
+			$(document.head).append(style);
+			return style;
 		},
 
 		// UI.html(htmlText) - adds HTML to the UI body
 		html: function(html, options) {
-			var div = document.createElement('div');
-			div.innerHTML = html;
-			var node = div.firstChild;
-			if (options && options.id) node.id = options.id;
-			var id = node.id;
-			if (!id) node.id = id = 'ui-' + idSequence ++;
-			document.body.appendChild(node);
-			return $('#'+node.id);
+			var node = $(html);
+			if (options && options.id) node.attr("id", options.id);
+			var id = node.attr("id");
+			if (!id) node.attr("id", id = 'ui-' + idSequence++);
+			$(document.body).append(node);
+			return node;
 		},
 
 		// list loaded addons
@@ -136,14 +132,18 @@ define(function(global) {
 		// A simple pub/sub system, allows passing of UI events around in a uncoupled way
 		// so mods don't need to be aware of each other, only the event they fire.
 		pub: function(topic, content) {
-			var log = "[" + topic;
-			topic = topics[topic];
-			try { log += " " + JSON.stringify(content); } catch(e) { };
-			console.log(log+"]");
-			if (topic) {
-				for (var i = 0; i < topic.handlers.length; i++) {
+
+			if (this.debug) {
+				var log = "[" + topic;
+				try { log += " " + JSON.stringify(content); } catch(e) { };
+				console.log(log+"]");
+			}
+
+			var handlers = topics[topic];
+			if (handlers) {
+				for (var i = 0; i < handlers.length; i++) {
 					try { 
-						(topic.handlers[i])(content, topic);
+						(handlers[i])(content, topic);
 					} catch(e) {
 						console.error(e);
 					}
@@ -151,7 +151,7 @@ define(function(global) {
 			}
 		},
 		sub: function(topic, handler) {
-			(topics[topic] = topics[topic] || { topic: topic, handlers: [] }).handlers.push(handler);
+			(topics[topic] = topics[topic] || []).push(handler);
 		},
 
 		// Given an options, and a query position, return the css properties to have this
