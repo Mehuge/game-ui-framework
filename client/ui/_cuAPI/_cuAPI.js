@@ -28,12 +28,16 @@ UI.define([], function() {
 	cuAPI.__defineGetter__("targetName", function() { return target_name; });
 	cuAPI.__defineGetter__("name", function() { return name; });
 
+	function rand(n) {		// returns random integer between 0 and n inclusive
+		return (Math.random()*++n)|0;
+	}
+
 	function emulate() {
-		player_health = (Math.random()*max_player_health)|0;
-		player_endurance = (Math.random()*max_player_endurance)|0;
-		player_mana = (Math.random()*max_player_mana)|0;
-		target_health = (Math.random()*max_target_health)|0;
-		target_name = [ 'Gog', 'Ladonna', 'Hulbur' ][(Math.random()*3)|0];
+		player_health = rand(max_player_health);
+		player_endurance = rand(max_player_endurance);
+		player_mana = rand(max_player_mana);
+		target_health = rand(max_target_health);
+		target_name = [ 'Gog', 'Ladonna', 'Hulbur' ][rand(2)];
 		player_xp ++;
 		if (player_xp > 100) player_xp = 0;
 		UI.pub("GAME_TICK", cuAPI);
@@ -43,7 +47,7 @@ UI.define([], function() {
 		name = nick;
 	});
 
-	setInterval(emulate,100);
+	setInterval(emulate,1000);
 
 	return cuAPI;
 });
