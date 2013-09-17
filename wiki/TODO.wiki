@@ -1,0 +1,5 @@
+#summary ToDo List
+
+  * Embedded Excel Spreadsheet (just for the lulz)
+  * Unloading of addons
+  * Ability to enable/disable addons (dialog)
