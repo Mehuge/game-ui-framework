@@ -71,7 +71,8 @@ define(function(global) {
 				modules.push(name);
 			} else {
 				// its a component
-				var component = _r[name] = _r[name] || { name: name };
+				var component = _r[name] = _r[name] || { name: name, dependants: -1 };
+				component.dependants++;
 				component.module = component.module || "ui/"+name+"/"+name;
 				component.readyState = component.readyState || LOADING;
 				_m[component.module] = component;				// update module map (points back to component)
@@ -81,9 +82,9 @@ define(function(global) {
 		return modules;
 	};
 
-	function _unload(name) {
+	function _unload(name, unloaded) {
 		var component = _r[name];
-		if (component) {
+		if (component && component.dependants == 0) {
 			if (component.interface && component.interface.stop) {
 				component.interface.stop();
 			}
@@ -92,6 +93,8 @@ define(function(global) {
 			$("head script[data-requiremodule|='"+component.module+"']").remove();
 			delete _r[name].interface;
 			delete _r[name].readyState;
+			component.dependants = -1;
+			if (unloaded) unloaded();
 		}
 	}
 
@@ -116,8 +119,8 @@ define(function(global) {
 		},
 
 		// Stop a UI component and unload it (experimental)
-		unload: function(name) {
-			_unload(name);
+		unload: function(name, unloaded) {
+			_unload(name, unloaded);
 		},
 
 		// UI.css(cssText) - adds CSS styles to UI header
