@@ -82,7 +82,7 @@ define(function(global) {
 		return modules;
 	};
 
-	function _unload(name, unloaded) {
+	function _unload(name) {
 		var component = _r[name];
 		if (component && component.dependants == 0) {
 			if (component.interface && component.interface.stop) {
@@ -94,7 +94,7 @@ define(function(global) {
 			delete _r[name].interface;
 			delete _r[name].readyState;
 			component.dependants = -1;
-			if (unloaded) unloaded();
+			return true;
 		}
 	}
 
@@ -119,8 +119,8 @@ define(function(global) {
 		},
 
 		// Stop a UI component and unload it (experimental)
-		unload: function(name, unloaded) {
-			_unload(name, unloaded);
+		unload: function(name) {
+			return _unload(name);
 		},
 
 		// UI.css(cssText) - adds CSS styles to UI header
