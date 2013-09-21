@@ -27,7 +27,9 @@ UI.define([], function() {
 		// Register a "keypress" handler for the specified key code, returns a handle to the
 		// registration.
 		onkey: function(key, action) {
-			return (kh[key] = kh[key] || []).push({ key: key, action: action });
+			var h = { key: key, action: action };
+			(kh[key] = kh[key] || []).push(h);
+			return h;
 		},
 
 		// var h = keyboard.onkey(99,handler); ... keyboard.remove(h);
@@ -35,7 +37,8 @@ UI.define([], function() {
 		remove: function(h) {
 			var handlers = kh[h.key];
 			if (handlers) {
-				delete handlers[h];
+				var i = handlers.indexOf(h);
+				handlers.splice(i,1);
 				if (handlers.length == 0) {
 					delete kh[h.key];
 				}
