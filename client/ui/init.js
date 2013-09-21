@@ -21,7 +21,7 @@ define(function(global) {
 			var component = _m[modules[i]];
 			if (component) {
 				if (args[i]) {
-					var pub = component._i = args[i];
+					var pub = component.interface = args[i];
 					var readyState = component.readyState || LOADING;
 					if (typeof pub.run == "function")  {
 						if (readyState < STARTED) {
@@ -81,6 +81,20 @@ define(function(global) {
 		return modules;
 	};
 
+	function _unload(name) {
+		var component = _r[name];
+		if (component) {
+			if (component.interface && component.interface.stop) {
+				component.interface.stop();
+			}
+			requirejs.undef(component.module);
+			// need to remove the script element for this module
+			$("head script[data-requiremodule|='"+component.module+"']").remove();
+			delete _r[name].interface;
+			delete _r[name].readyState;
+		}
+	}
+
 	// UI public interface(s)
 	return { 
 
@@ -99,6 +113,11 @@ define(function(global) {
 			for (var k in s) {
 				if (s.hasOwnProperty(k)) d[k] = s[k];
 			}
+		},
+
+		// Stop a UI component and unload it (experimental)
+		unload: function(name) {
+			_unload(name);
 		},
 
 		// UI.css(cssText) - adds CSS styles to UI header
