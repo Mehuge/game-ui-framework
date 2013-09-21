@@ -9,7 +9,7 @@ UI.define(['_keyboard','_window','text!./style.css','text!./content.html'],funct
 	function load() {
 		var loaded = UI.addons(), html = '', 
 			states = [ "LOADING", "INITIALISED", "DEFINED", "STARTED" ];
-		html += '<table><tr><th>Name</th><th>State</th><th>Enabled</th></tr>';
+		html += '<table><thead><tr><th></th><th>Name</th><th>State</th></tr></thead><tbody>';
 		for (var i = 0; i < loaded.length; i++) {
 			var addon = loaded[i], interface = addon.interface,
 				unloaded = addon.readyState == undefined,
@@ -17,15 +17,15 @@ UI.define(['_keyboard','_window','text!./style.css','text!./content.html'],funct
 				checked = !unloaded,
 				stoppable = (interface && interface.stop && addon.dependants == 0) || unloaded;
 			html += '<tr>'
-					+ '<td>'+addon.name+'</td>'
-					+ '<td>'+state+'</td>'
 					+ '<td><input type="checkbox"'
 						+ (checked ? ' checked' : '')
 						+ (stoppable ? ' i="'+i+'"' : ' disabled') + '>'
 						+ '</td>'
+					+ '<td>'+addon.name+'</td>'
+					+ '<td>'+state+'</td>'
 					+ '</tr>';
 		}
-		html += '</table>';
+		html += '</tbody></table>';
 		addons.content.html(html);
 		addons.content.find('input').on('change', function(event) {
 			var i = event.target.getAttribute("i");
