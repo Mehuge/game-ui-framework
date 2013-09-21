@@ -15,7 +15,7 @@ UI.define(['_keyboard','_window','text!./style.css','text!./content.html'],funct
 				unloaded = addon.readyState == undefined,
 				state = unloaded ? "DISABLED" : states[addon.readyState],
 				checked = !unloaded,
-				stoppable = (interface && interface.stop) || unloaded;
+				stoppable = (interface && interface.stop && addon.dependants == 0) || unloaded;
 			html += '<tr>'
 					+ '<td>'+addon.name+'</td>'
 					+ '<td>'+state+'</td>'
@@ -32,11 +32,14 @@ UI.define(['_keyboard','_window','text!./style.css','text!./content.html'],funct
 			if (i) {
 				var addon = loaded[i];
 				if (addon.readyState == undefined) {
-					UI.require([ addon.name ]);
+					UI.require([ addon.name ], load);
 				} else {
-					UI.unload(addon.name);
+					if (UI.unload(addon.name)) {
+						load();
+					} else {
+						this.checked = true;		// can't be unloaded
+					}
 				}
-				setTimeout(function() { load(); }, 100);
 			}
 		});
 	};
