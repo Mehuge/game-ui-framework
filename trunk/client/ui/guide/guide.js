@@ -5,14 +5,16 @@ UI.define(['_keyboard','_window','state','text!./guide.css','text!./guide.html']
 			hasChrome: true, 
 			hasBorder: true,
 			draggable: { cancel: '#guide>div' }
-	});
+		}),
+		keypress;
+
 	guide.css(state.get('guide-position',{}));			// {} allows CSS to provide the default position
 	guide.on("dragstop", function(event,ui) {
 		state.set('guide-position', UI.anchor(guide, ui.position));
 	});
 
 	function init() {
-		keyboard.onkey(105,function(event) {
+		keypress = keyboard.onkey(105,function(event) {
 			if (guide[0].style.display == 'block') {
 				exports.hide();
 			} else {
@@ -23,6 +25,8 @@ UI.define(['_keyboard','_window','state','text!./guide.css','text!./guide.html']
 	}
 
 	function stop() {
+		guide.off("dragstop");
+		keyboard.remove(keypress);
 		guide.remove();
 		css.remove();
 	}
