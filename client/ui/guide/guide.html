@@ -19,6 +19,6 @@
 <p>The source code for this framework can be downloaded from <a href="https://code.google.com/p/game-ui-framework/" target="_blank">here</a></p>
 <h2>Addon States</h2>
 <p>LOADING means something went wrong, as the component never finished loading.</p>
-<p>INITIALISED means the component loaded and initialised, but did not return a public interface.  This may be because it is providing functionality rather than providing an API.  An example of this are the slash command handlers, they handle slash commands but don't provide a public interface</p>
-<p>DEFINED means the component loaded, initialised and returned a public interface, but did not provide a run() method and so is not considered runnable (startable).</p>
+<p>LOADED means the component loaded and initialised, but did not return a public interface.  This may be because it is providing functionality rather than providing an API.  An example of this are the slash command handlers, they handle slash commands but don't provide a public interface</p>
+<p>AVAILABLE means the component loaded, initialised and returned a public interface, but did not provide a run() method and so is not considered runnable (startable).</p>
 <p>STARTED means the component loaded, initialised, returned a public interface which included a run() method which was called and completed successfully.</p>
