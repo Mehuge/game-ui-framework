@@ -90,7 +90,7 @@ define(function(global) {
 			}
 			requirejs.undef(component.module);
 			// need to remove the script element for this module
-			$("head script[data-requiremodule|='"+component.module+"']").remove();
+			$("head script[data-requiremodule='"+component.module+"']").remove();
 			delete _r[name].interface;
 			delete _r[name].readyState;
 			component.dependants = -1;
