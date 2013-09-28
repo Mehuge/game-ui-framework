@@ -1,5 +1,6 @@
 #p-uf { position: absolute; bottom: 5px; right: 5px; width: 128px; height: 95px; font-family: Arial; display: none;
 	background-image: url('ui/player-unitframe/images/unit-frame.png');
+	-webkit-transform: translateZ(0);
  }
 #draghandle { position: absolute; top: 0px; left: 0px; height: 16px; width: 120px; cursor: move; z-index: 1; }
 #p-uf #p-name { position: absolute; top: 0px; left: 16px; width: 101px; height: 10px; font-size: 10px; color: white; }
